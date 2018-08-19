@@ -1,37 +1,49 @@
 <template>
-  <!-- <div class="image" :src="src">
-    <span v-for="image in src">
-      <img :src="image[2]" :alt="image[1]" :index="image[0]" />
-    </span>
-  </div> -->
-  <mu-carousel transition="fade" cycle="false" v-if="src">
-    <mu-carousel-item v-for="image in src" :key="image[0]">
-      <img :src="image[2]" :alt="image[1]" :index="image[0]" />
-    </mu-carousel-item>
-  </mu-carousel>
+<div class="image" :src="src">
+  <sidebar :src="src" @clicked="setIndex"></sidebar>
+  <section v-if="index">
+    <img :src="src[index][2]" />
+  </section>
+</div>
 </template>
 <script>
+import sidebar from '@/components/sidebar';
+
 export default {
-  props: ['src']
+  props: ['src'],
+  data() {
+    return {
+      index: ''
+    }
+  },
+  components: {
+    'sidebar': sidebar
+  },
+  methods: {
+    setIndex(event) {
+      this.index = event.target.getAttribute('index');
+    }
+  }
 };
 </script>
 
-<style scoped>
-  span {
-    float: left
+<style>
+  .image section {
+    text-align: right;
   }
 
-  img {
-    max-height: 100vh;
+  aside.open + section img {
+    width: 80vw;
   }
 
-  .mu-carousel-item > img {
-    min-width: 0;
-    width: auto;
-    max-height: 100vh;
+  aside.open.small + section img {
+    width: 95vw;
+    max-width: calc(100% - 250px);
   }
 
-  .mu-carousel {
-    height: 100vh;
+  .image section img {
+    width: 100vh;
+    min-height: 100vh;
   }
+
 </style>

@@ -4,23 +4,25 @@ const NotifierPlugin = require('webpack-notifier');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (env, argv) => {
   return {
-    mode: (process.env.WEBPACK_SERVE) ? 'development' : argv.mode,
+    mode: process.env.WEBPACK_SERVE ? 'development' : argv.mode,
     entry: {
-      app: './src/main.js'
+      app: './src/main.js',
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js',
+      chunkFilename: '[name].bundle.js', 
     },
     resolve: {
-      extensions: ['.js', '.vue', '.json'],
+      extensions: ['.js', '.vue', '.json', '.css'],
       alias: {
         '@': path.join(__dirname, 'src'),
-        vue: (process.env.WEBPACK_SERVE) ? 'vue/dist/vue' : 'vue/dist/vue.min'
+        vue: process.env.WEBPACK_SERVE ? 'vue/dist/vue.esm.js' : 'vue/dist/vue.runtime.esm.js',
+        jszip: process.env.WEBPACK_SERVE ? 'jszip/dist/jszip' : 'jszip/dist/jszip.min'
       }
     },
     module: {
@@ -44,10 +46,13 @@ module.exports = (env, argv) => {
         {
           test: /\.css/,
           loader: [
-            (process.env.WEBPACK_SERVE)
+            process.env.WEBPACK_SERVE
               ? 'vue-style-loader'
               : MiniCssExtractPlugin.loader,
-            'css-loader'
+            {
+              loader: 'css-loader',
+              options: { importLoaders: 1 }
+            }
           ]
         },
         {
@@ -90,9 +95,9 @@ module.exports = (env, argv) => {
       }),
       new NotifierPlugin({
         alwaysNotify: true
-      }),
+      })
     ],
-    devtool: (process.env.WEBPACK_SERVE) ? '#source-map' : '',
+    devtool: process.env.WEBPACK_SERVE ? '#source-map' : '',
     serve: {
       compress: true,
       host: '0.0.0.0',
@@ -100,6 +105,17 @@ module.exports = (env, argv) => {
       hot: {
         logLevel: 'info',
         logTime: true
+      }
+    },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          }
+        }
       }
     },
     node: {

@@ -1,10 +1,8 @@
 <template>
-<v-app>
   <div id="dropzone" @drop.prevent="onDrop" @dragenter="onDragEnter" @dragover="onDragOver" @dragleave="onDragLeave" :class="{drop: true, active: dragging == true}">
     <image-elem :src="src" />
     <input type="file" v-if="!dropped" @change="onDrop" />
   </div>
-</v-app>
 </template>
 <script>
 import Loader from '@/functions/loader';
