@@ -1,5 +1,3 @@
-import JSZip from 'jszip';
-
 export default class Loader {
   constructor() {
     this.reader = new FileReader();
@@ -27,31 +25,50 @@ export default class Loader {
 
   _zip(file, fn) {
     const that = this;
-    JSZip.loadAsync(file).then(zip => {
-      var re = /^(?:(?!__macosx)).*(.jpg|.png|.gif|.jpeg)$/;
-      var promises = Object.keys(zip.files)
-        .sort(that._compareFileNames)
-        .filter(function(fileName) {
-          // console.log(fileName);
-          // don't consider non image files
-          return re.test(fileName.toLowerCase());
+    import('jszip').then(JSZip => {
+      JSZip.loadAsync(file)
+        .then(zip => {
+          var re = /^(?:(?!__macosx)).*(.jpg|.png|.gif|.jpeg)$/;
+          var promises = Object.keys(zip.files)
+            .sort(that._compareFileNames)
+            .filter(function(fileName) {
+              // console.log(fileName);
+              // don't consider non image files
+              return re.test(fileName.toLowerCase());
+            })
+            .map(function(fileName, index) {
+              var file = zip.files[fileName];
+              return file.async('blob').then(function(blob) {
+                return [
+                  index,
+                  fileName, // keep the link between the file name and the content
+                  URL.createObjectURL(blob) // create an url. img.src = URL.createObjectURL(...) will work
+                ];
+              });
+            });
+          // `promises` is an array of promises, `Promise.all` transforms it
+          // into a promise of arrays
+          return Promise.all(promises);
         })
-        .map(function(fileName, index) {
-          var file = zip.files[fileName];
-          return file.async('blob').then(function(blob) {
-            return [
-              index,
-              fileName, // keep the link between the file name and the content
-              URL.createObjectURL(blob) // create an url. img.src = URL.createObjectURL(...) will work
-            ];
-          });
+        .then(result => {
+          return fn(result);
         });
-      // `promises` is an array of promises, `Promise.all` transforms it
-      // into a promise of arrays
-      return Promise.all(promises);
-    }).then(result => {
-      return fn(result);
     });
+  }
+
+  _rar(rarFile, fn) {
+    const unrar = require("unrar-js/lib/Unrar");
+    const files = unrar(rarFile);
+
+    const result = files.map((file,index) => {
+      return [
+        index,
+        file.filename,
+        URL.createObjectURL(new Blob([file.fileData], {type: 'image/png'}))
+      ];
+    });
+
+    return fn(result);
   }
 
   read(file, fn) {
@@ -60,8 +77,13 @@ export default class Loader {
       that.reader.onload = evt => {
         return fn(evt);
       };
-      if (file.name.endsWith('.cbz')) {
-        return that._zip(file, fn)
+      if (file.name.endsWith('.cbz') || file.name.endsWith('.zip')) {
+        return that._zip(file, fn);
+      } else if (file.name.endsWith('.cbr') || file.name.endsWith('.rar')) {
+        that.reader.onload = evt => {
+          return that._rar(evt.target.result, fn);
+        };
+        that.reader.readAsArrayBuffer(file);
       } else if (file.type.includes('image')) {
         that.reader.readAsDataURL(file);
       }

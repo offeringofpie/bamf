@@ -15,14 +15,14 @@ module.exports = (env, argv) => {
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: '[name].js',
-      chunkFilename: '[name].bundle.js', 
+      chunkFilename: '[name].bundle.js',
     },
     resolve: {
       extensions: ['.js', '.vue', '.json', '.css'],
       alias: {
         '@': path.join(__dirname, 'src'),
         vue: process.env.WEBPACK_SERVE ? 'vue/dist/vue.esm.js' : 'vue/dist/vue.runtime.esm.js',
-        jszip: process.env.WEBPACK_SERVE ? 'jszip/dist/jszip' : 'jszip/dist/jszip.min'
+        jszip: process.env.WEBPACK_SERVE ? 'jszip' : 'jszip/dist/jszip.min'
       }
     },
     module: {
