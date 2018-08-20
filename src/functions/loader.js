@@ -25,7 +25,7 @@ export default class Loader {
 
   _zip(file, fn) {
     const that = this;
-    import('jszip').then(JSZip => {
+    import(/* webpackChunkName: "jszip" */'jszip').then(JSZip => {
       JSZip.loadAsync(file)
         .then(zip => {
           var re = /^(?:(?!__macosx)).*(.jpg|.png|.gif|.jpeg)$/;
@@ -57,18 +57,20 @@ export default class Loader {
   }
 
   _rar(rarFile, fn) {
-    const unrar = require("unrar-js/lib/Unrar");
-    const files = unrar(rarFile);
+    import(/* webpackChunkName: "unrar" */'unrar-js/lib/Unrar').then(unrar => {
 
-    const result = files.map((file,index) => {
-      return [
-        index,
-        file.filename,
-        URL.createObjectURL(new Blob([file.fileData], {type: 'image/png'}))
-      ];
+      const files = unrar.default(rarFile);
+
+      const result = files.map((file,index) => {
+        return [
+          index,
+          file.filename,
+          URL.createObjectURL(new Blob([file.fileData], {type: 'image/jpg'}))
+        ];
+      });
+
+      return fn(result);
     });
-
-    return fn(result);
   }
 
   read(file, fn) {
