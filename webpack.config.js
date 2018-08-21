@@ -49,10 +49,8 @@ module.exports = (env, argv) => {
             process.env.WEBPACK_SERVE
               ? 'vue-style-loader'
               : MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader',
-              options: { importLoaders: 1 }
-            }
+              {loader: 'css-loader', options: {importLoaders: 1}},
+              {loader: 'postcss-loader'},
           ]
         },
         {
@@ -109,13 +107,6 @@ module.exports = (env, argv) => {
     },
     optimization: {
       splitChunks: {
-        // cacheGroups: {
-        //   commons: {
-        //     test: /[\\/]node_modules[\\/]/,
-        //     name: 'vendors',
-        //     chunks: 'all'
-        //   }
-        // },
         chunks: 'all'
       }
     },

@@ -1,0 +1,26 @@
+a {
+    text-decoration: none;
+}
+a span {
+    display:none;
+  }
+
+a:before {
+    font-size: 3em;
+    color: rebeccapurple;
+    display: inline-block;
+    text-align: center;
+    width: 33%;
+  }
+
+.left:before {
+    content: '\27e6';
+  }
+
+.bottom:before {
+    content: '\23b5';
+  }
+
+.settings:before {
+    content: '\2699';
+  }

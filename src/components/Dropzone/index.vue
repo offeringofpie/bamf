@@ -71,30 +71,4 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-#dropzone {
-  width: 100vw;
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-  transition: 0.2s all ease-in-out;
-  background-color: rgba(0, 0, 0, .1);
-}
-
-input[type=file] {
-  opacity: 0.0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.active {
-  box-shadow: inset 0 0 0 10px rebeccapurple;
-}
-</style>
+<style scoped src="./styles"></style>
