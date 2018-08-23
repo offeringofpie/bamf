@@ -1,0 +1,22 @@
+section {
+  height: 100%;
+  overflow: hidden;
+
+  & img {
+    width: 100vw;
+  }
+}
+
+.carousel {
+  display: flex;
+  overflow: auto hidden;
+  height: 90vh;
+  width: inherit;
+}
+
+.carousel-item {
+  width: 100vw;
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto;
+}

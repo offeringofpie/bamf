@@ -1,12 +1,17 @@
+@import 'variables';
+
 aside {
-  position: fixed;
-  width: 20vw;
-  background-color: rgba(255, 255, 255, 0.5);
-  box-shadow: 1px 0px 16px -8px;
+  background-color: var(--darken);
   transform-origin: left;
-  transform: scaleX(0);
+  position: sticky;
+  top: 0;
+  height: 100%;
+  grid-row: 1;
+  grid-column: 1 / 2;
+  box-sizing: border-box;
+  /* transform: scaleX(0); */
   transition: 0.2s all ease-in-out;
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 .open {

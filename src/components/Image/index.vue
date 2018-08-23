@@ -1,27 +1,23 @@
 <template>
-<div class="image" :src="src">
-  <sidebar :src="src" @clicked="setIndex"></sidebar>
-
-  <section v-if="index">
-    <img v-for="image in src" v-bind:key="image[0]"
-      :src="image[2]" :alt="image[1]" :index="image[0]"
-      :class="{active: index == image[0],toRight: index < image[0], toLeft: index > image[0]}"
-    />
-  </section>
+<div class="image">
+  <carousel :src="src" :index="index"></carousel>
+  <footer-element :src="src" @clicked="setIndex" :index="index"></footer-element>
 </div>
 </template>
 <script>
-import Sidebar from '@/components/Sidebar';
+import Footer from '@/components/Footer';
+import Carousel from '@/components/Carousel';
 
 export default {
   props: ['src'],
   data() {
     return {
-      index: ''
+      index: 0
     }
   },
   components: {
-    'sidebar': Sidebar
+    'carousel': Carousel,
+    'footer-element': Footer
   },
   methods: {
     setIndex(event) {

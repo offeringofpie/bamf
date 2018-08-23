@@ -1,3 +1,5 @@
 :root {
-  --grey: rgba(0, 0, 0, .1);
-}
+  --grey: #6c757d;
+  --grey-dark: #343a40;
+  --darken: rgba(0, 0, 0, .5);
+  }

@@ -1,37 +1,5 @@
-.image section {
-  text-align: right;
-  height: 0;
-}
-
-aside.open ~ section img.active {
-  width: 80vw;
-}
-
-aside.open.small ~ section img.active {
-  width: 95vw;
-  max-width: calc(100% - 250px);
-}
-
-.image section img {
-  transform: scaleX(0);
-  transition: 0.2s all ease-in-out;
-  min-height: 0;
-  height: 0;
-  opacity: 0;
-}
-
-section img.active {
-  width: 100vw;
-  min-height: 100vh;
-  height: auto;
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-section img.toLeft {
-  transform-origin: middle left;
-}
-
-section img.toRight {
-  transform-origin: middle right;
+.image {
+  display: grid;
+  grid-template-rows: 1fr .1fr;
+  height: 100vh;
 }

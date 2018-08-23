@@ -1,0 +1,56 @@
+@import 'variables.css';
+
+footer {
+  grid-row: 2;
+  background: var(--grey-dark);
+  align-items: stretch;
+  position: relative;
+}
+
+nav {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  overflow-x: auto;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  overflow: auto;
+}
+
+li {
+  flex: none;
+  width: 100%;
+  max-width: 66px;
+  height: 100%;
+  list-style: none;
+}
+
+a {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  display: block;
+  opacity: 0.4;
+  filter: sepia(1);
+  transition: 0.2s all ease-in-out;
+  position: relative;
+
+  &:hover,
+  &.active {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+span {
+  color: white;
+  position: absolute;
+  padding: 5px;
+  background-color: rgba(0,0,0,.7);
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+}
