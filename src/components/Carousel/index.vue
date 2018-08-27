@@ -11,7 +11,12 @@
 <script>
 export default {
   props: ['src','index'],
-
+  watch: {
+    index: (n,o) => {
+      let el = document.querySelector('[index="'+n+'"]');
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }
 }
 </script>
 
