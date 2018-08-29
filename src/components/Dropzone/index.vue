@@ -1,13 +1,13 @@
 <template>
   <div id="dropzone" @drop.prevent="onDrop" @dragenter="onDragEnter" @dragover="onDragOver" @dragleave="onDragLeave" :class="{active: dragging == true}">
-    <image-elem :src="src" />
+    <image-elem v-if="src" :src="src" />
     <input type="file" v-if="!dropped" @change="onDrop" />
   </div>
 </template>
 <script>
 import Loader from '@/functions/loader';
 import Sync from '@/functions/sync';
-import Image from '@/components/Image';
+import Reader from '@/components/Reader';
 const loader = new Loader();
 const sync = new Sync();
 
@@ -21,7 +21,7 @@ export default {
     }
   },
   components: {
-    'image-elem': Image
+    'image-elem': Reader
   },
   methods: {
     onDrop(e) {
@@ -63,12 +63,8 @@ export default {
     },
     onDragOver(e) {
       e.preventDefault();
-    },
+    }
   },
-
-  mounted() {
-
-  }
 };
 </script>
 <style scoped src="./styles"></style>

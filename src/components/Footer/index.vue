@@ -15,7 +15,7 @@ export default {
   props: ['src','index'],
   methods: {
     onclick(event) {
-      this.$emit('clicked', event);
+      this.$emit('clicked', event.target);
       event.preventDefault();
     }
   }
