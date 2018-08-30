@@ -16,5 +16,5 @@ Type ```npm run build``` or ```yarn build``` to build a production ready version
 ## Browser support
 
 | ![IE / Edge](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.0.0/edge/edge_24x24.png)<br/>IE / Edge | ![Firefox](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.0.0/firefox/firefox_24x24.png)<br/>Firefox | ![Chrome](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.0.0/chrome/chrome_24x24.png)<br/>Chrome | ![Opera](https://cdnjs.cloudflare.com/ajax/libs/browser-logos/46.0.0/opera/opera_24x24.png)<br/>Opera |
-| --------- | --------- | --------- | --------- |
+| :---------: | :---------: | :---------: | :---------: |
 | IE11, Edge| last 3 versions| last 3 versions| last 3 versions
