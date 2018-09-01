@@ -1,5 +1,5 @@
 <template>
-<div class="reader">
+<div class="reader" :class="{'adapt': width}">
   <carousel :src="src" :index="index" @scrolled="setIndex"></carousel>
   <footer-element :src="src" @clicked="setIndex" :index="index"></footer-element>
 </div>
@@ -13,7 +13,8 @@ export default {
   props: ['src'],
   data() {
     return {
-      index: 0
+      index: 0,
+      width: false
     }
   },
   components: {
@@ -37,9 +38,10 @@ export default {
       switch (e.keyCode) {
         case 37: delta = -1; break;
         case 39: delta = 1; break;
+        case 87: this.width = !this.width; break;
       }
 
-      this.index = Math.max(0, this.index + delta);
+      this.index = Math.max(0, parseInt(this.index) + delta);
     });
   }
 };

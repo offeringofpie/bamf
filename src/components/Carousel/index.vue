@@ -18,28 +18,41 @@ export default {
   },
   watch: {
     index: (n,o) => {
-      let el = document.querySelector('[index="'+n+'"]');
+      let el = document.querySelector('[index="'+n+'"]').parentElement;
       el.scrollIntoView({ behavior: "smooth" });
     }
   },
   methods: {
+    /**
+     * Scroll handler
+     * @param  {Event} ev Scrolling event
+     */
     handleScroll(ev) {
-      let el = document.querySelector('[index="'+this.index+'"]');
-      let elPosX = el.getBoundingClientRect().x;
+      let el = document.querySelector('[index="'+this.index+'"]').parentElement;
 
       if (this.scrolling != -1) {
         clearTimeout(this.scrolling);
       }
 
       this.scrolling = window.setTimeout(()=>{
-        if (elPosX < 0) {
-          let nextEl = el.parentElement.nextSibling.querySelector('img');
-          nextEl.scrollIntoView({ behavior: "smooth" });
-          this.$emit('scrolled', el.parentElement.nextSibling.querySelector('img'));
-        } else if (elPosX > 0) {
-          let nextEl = el.parentElement.previousSibling.querySelector('img');
-          nextEl.scrollIntoView({ behavior: "smooth" });
-          this.$emit('scrolled', el.parentElement.previousSibling.querySelector('img'));
+        /**
+         * Check which sibling is visible
+         * @type {Array}
+         */
+        let visible = [...el.parentElement.querySelectorAll(el.nodeName)].find(sib => {
+          return sib.getBoundingClientRect().left >= 0;
+        });
+
+        let elPosX = visible.getBoundingClientRect().x;
+        let prevPosX = visible.previousSibling.getBoundingClientRect().x;
+
+        if (elPosX > 0 && elPosX <= window.innerWidth/2) {
+          visible.scrollIntoView({ behavior: "smooth" });
+          this.$emit('scrolled', visible.querySelector('img'));
+        } else if (prevPosX < 0 && prevPosX > -window.innerWidth/2) {
+          let prevEl = visible.previousSibling;
+          prevEl.scrollIntoView({ behavior: "smooth" });
+          this.$emit('scrolled', prevEl.querySelector('img'));
         }
       }, 200);
     },

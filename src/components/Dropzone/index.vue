@@ -1,7 +1,8 @@
 <template>
   <div id="dropzone" @drop.prevent="onDrop" @dragenter="onDragEnter" @dragover="onDragOver" @dragleave="onDragLeave" :class="{active: dragging == true}">
     <image-elem v-if="src" :src="src" />
-    <input type="file" v-if="!dropped" @change="onDrop" />
+    <input type="file" v-if="!dropped" id="file"  name="file" @change="onDrop" />
+    <label for="file" v-if="!dropped">To open a comic book file,<br>click anywere on the page,<br>or drop it anywere on the page.</label>
   </div>
 </template>
 <script>
