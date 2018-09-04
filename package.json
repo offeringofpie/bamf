@@ -6,7 +6,7 @@
     "start": "webpack-serve",
     "build": "npm run clean && npm run build:webpack",
     "build:webpack": "webpack --mode production",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./docs"
   },
   "keywords": [],
   "author": "",

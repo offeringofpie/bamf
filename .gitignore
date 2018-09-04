@@ -5,7 +5,9 @@
 !webpack.config.js
 !index.html
 !README.md
+!.gitlab-ci.yml
 !src
+!docs
 !dist
 !src/**/*
 !dist/**/*

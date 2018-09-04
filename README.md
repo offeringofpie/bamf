@@ -2,7 +2,7 @@
 
 <img src="https://vuejs.org/images/logo.png" alt="Vue" height="64"> <img src="https://webpack.js.org/assets/icon-square-small-slack.png" alt="Webpack" height="64">
 
-Minimal starter pack for Vue web applications
+# Comic book reader built using Vue.
 
 ## Getting started
 Type ```yarn``` or ```npm i``` in the terminal to install dependencies

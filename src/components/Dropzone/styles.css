@@ -9,7 +9,7 @@
   background-color: var(--grey-dark);
 
   &:hover {
-    background-color: rgba(0,0,0,.8);
+    background-color: var(--purple);
   }
 }
 
@@ -26,7 +26,7 @@ input {
 }
 
 label {
-  color: white;
+  color: var(--light);
   cursor: pointer;
   font-size: 2em;
   left: 50%;
@@ -38,5 +38,5 @@ label {
 }
 
 .active {
-  box-shadow: inset 0 0 0 10px rebeccapurple;
+  box-shadow: inset 0 0 10px 10px #000;
 }

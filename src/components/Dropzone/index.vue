@@ -22,7 +22,7 @@ export default {
     }
   },
   components: {
-    'image-elem': Reader
+    'image-elem': Reader,
   },
   methods: {
     onDrop(e) {
