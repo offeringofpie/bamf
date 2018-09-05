@@ -1,6 +1,6 @@
 # Bamf!
 
-<img src="logo-bamf.svg" alt="Vue" height="256"> 
+<img src="logo-bamf.png" alt="Vue" height="256"> 
 
 Comic book reader built using Vue.
 
