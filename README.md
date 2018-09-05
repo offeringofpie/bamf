@@ -1,8 +1,10 @@
-# Vue Webpack starter
+# Bamf!
+
+![Bamf!](./docs/logo-bamf.svg)
+
+Comic book reader built using Vue.
 
 <img src="https://vuejs.org/images/logo.png" alt="Vue" height="64"> <img src="https://webpack.js.org/assets/icon-square-small-slack.png" alt="Webpack" height="64">
-
-# Comic book reader built using Vue.
 
 ## Getting started
 Type ```yarn``` or ```npm i``` in the terminal to install dependencies
