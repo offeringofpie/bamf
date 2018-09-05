@@ -4,8 +4,9 @@ pages:
   stage: deploy
   script:
   - echo 'Nothing to do...'
+  - cp -rp dics public
   artifacts:
     paths:
-    - docs
+    - public
   only:
   - master
