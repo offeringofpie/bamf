@@ -4,4 +4,4 @@ export const listen = (el, ev, f) => {
   } else {
     return el.addEventListener(ev, f, false);
   }
-}
+};

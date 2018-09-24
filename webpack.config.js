@@ -36,7 +36,10 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.js$/,
-          loader: 'babel-loader',
+          loader: [
+            'babel-loader',
+            'eslint-loader'
+          ],
           include: [
             path.join(__dirname, 'src'),
             path.join(__dirname, 'test'),

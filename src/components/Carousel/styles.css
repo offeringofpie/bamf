@@ -12,7 +12,7 @@ section {
 .carousel {
   display: flex;
   overflow: auto hidden;
-  height: 90vh;
+  height: 100vh;
   width: inherit;
   -webkit-overflow-scrolling: touch;
 }

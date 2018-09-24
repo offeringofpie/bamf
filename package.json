@@ -18,6 +18,8 @@
     "babel-loader": "^8.0.0",
     "css-loader": "^1.0.0",
     "cssnano": "^4.0.5",
+    "eslint": "^5.6.0",
+    "eslint-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.1",
     "optimize-css-assets-webpack-plugin": "^5.0.0",
@@ -52,6 +54,29 @@
     "plugins": [
       "@babel/plugin-syntax-dynamic-import"
     ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "rules": {
+      "no-console": 2,
+      "no-debugger": 2,
+      "no-dupe-args": 2,
+      "no-dupe-keys": 2,
+      "no-duplicate-case": 2,
+      "no-empty": 2,
+      "no-extra-semi": 2,
+      "eqeqeq": [2,"allow-null"],
+      "no-unused-vars": 1,
+      "semi": [1,"always"]
+    }
   },
   "postcss": {
     "plugins": {
