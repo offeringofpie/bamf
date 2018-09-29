@@ -6,38 +6,46 @@
     "start": "webpack-serve",
     "build": "npm run clean && npm run build:webpack",
     "build:webpack": "webpack --mode production",
-    "clean": "rimraf ./docs"
+    "clean": "rimraf ./docs",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.56",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.56",
-    "@babel/preset-env": "^7.0.0-beta.56",
-    "babel-loader": "^8.0.0",
+    "@babel/core": "^7.0.0-beta.41",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@vue/test-utils": "^1.0.0-beta.25",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
     "css-loader": "^1.0.0",
-    "cssnano": "^4.0.5",
-    "eslint": "^5.6.0",
+    "cssnano": "^4.1.4",
+    "eslint": "^5.6.1",
     "eslint-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.4.1",
-    "optimize-css-assets-webpack-plugin": "^5.0.0",
-    "postcss": "^7.0.2",
+    "jest": "^23.6.0",
+    "jest-serializer-vue": "^2.0.2",
+    "mini-css-extract-plugin": "^0.4.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss": "^7.0.4",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^12.0.0",
     "postcss-loader": "^3.0.0",
     "postcss-simple-vars": "^4.1.0",
     "rimraf": "^2.6.2",
     "style-loader": "^0.22.1",
-    "vue-style-loader": "^4.1.1",
-    "webpack": "^4.16.4",
-    "webpack-cli": "^3.1.0",
+    "vue-jest": "^2.6.0",
+    "vue-style-loader": "^4.1.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
     "webpack-hot-client": "^4.1.1",
     "webpack-notifier": "^1.6.0",
     "webpack-serve": "^2.0.2"
   },
   "dependencies": {
+    "babel-core": "^7.0.0-bridge.0",
     "jszip": "^3.1.5",
     "unrar-js": "^0.2.3",
     "vue": "^2.5.17"
@@ -53,7 +61,21 @@
     ],
     "plugins": [
       "@babel/plugin-syntax-dynamic-import"
-    ]
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "env",
+            {
+              "targets": {
+                "node": "current"
+              }
+            }
+          ]
+        ]
+      }
+    }
   },
   "eslintConfig": {
     "parser": "babel-eslint",
@@ -73,9 +95,15 @@
       "no-duplicate-case": 2,
       "no-empty": 2,
       "no-extra-semi": 2,
-      "eqeqeq": [2,"allow-null"],
+      "eqeqeq": [
+        2,
+        "allow-null"
+      ],
       "no-unused-vars": 1,
-      "semi": [1,"always"]
+      "semi": [
+        1,
+        "always"
+      ]
     }
   },
   "postcss": {
@@ -86,6 +114,26 @@
       "postcss-cssnext": {},
       "postcss-simple-vars": {},
       "cssnano": {}
+    }
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "modulePaths": [
+      "<rootDir>/src",
+      "<rootDir>/node_modules"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    },
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-vue"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
     }
   }
 }

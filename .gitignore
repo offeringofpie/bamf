@@ -11,5 +11,7 @@
 !src
 !docs
 !dist
+!tests
 !src/**/*
 !docs/**/*
+!tests/**/*
