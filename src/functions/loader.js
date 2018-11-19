@@ -25,7 +25,7 @@ export default class Loader {
 
   _zip(file, fn) {
     const that = this;
-    import(/* webpackChunkName: "jszip" */'jszip').then(JSZip => {
+    import(/* webpackMode: "eager" */`jszip`).then(JSZip => {
       JSZip.loadAsync(file)
         .then(zip => {
           var re = /^(?:(?!__macosx)).*(.jpg|.png|.gif|.jpeg)$/;
@@ -33,7 +33,7 @@ export default class Loader {
             .sort(that._compareFileNames)
             .filter(function(fileName) {
               // console.log(fileName);
-              // don't consider non image files
+              // consider only image files
               return re.test(fileName.toLowerCase());
             })
             .map(function(fileName, index) {
@@ -57,7 +57,7 @@ export default class Loader {
   }
 
   _rar(rarFile, fn) {
-    import(/* webpackChunkName: "unrar" */'unrar-js/lib/Unrar').then(unrar => {
+    import(/* webpackMode: "eager" */'unrar-js/lib/Unrar').then(unrar => {
 
       const files = unrar.default(rarFile);
 

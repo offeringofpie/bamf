@@ -1,7 +1,7 @@
 <template>
   <div id="dropzone" @drop.prevent="onDrop" @dragenter="onDragEnter" @dragover="onDragOver" @dragleave="onDragLeave" :class="{active: dragging == true}">
     <image-elem v-if="src" :src="src" />
-    <input type="file" v-if="!dropped" id="file"  name="file" @change="onDrop" />
+    <input type="file" v-if="!dropped" id="file"  name="file" @change="onDrop" ref="fileElem"/>
     <label for="file" v-if="!dropped">To open a comic book file,<br>click anywere on the page,<br>or drop it anywere on the page.</label>
   </div>
 </template>
@@ -9,6 +9,8 @@
 import Loader from '@/functions/loader';
 import Sync from '@/functions/sync';
 import Reader from '@/components/Reader';
+
+const ipcRenderer = window.require("electron").ipcRenderer;
 const loader = new Loader();
 const sync = new Sync();
 
