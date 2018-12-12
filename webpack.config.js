@@ -6,9 +6,29 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const stats = {
+  all: false,
+  assets: true,
+  cachedAssets: true,
+  children: false,
+  chunks: false,
+  entrypoints: true,
+  errorDetails: true,
+  errors: true,
+  hash: true,
+  modules: false,
+  performance: true,
+  publicPath: true,
+  timings: true,
+  warnings: false,
+  exclude: [
+    'node_modules'
+  ]
+};
+
 module.exports = (env, argv) => {
   return {
-    mode: process.env.WEBPACK_SERVE ? 'development' : argv.mode,
+    mode: argv.mode,
     entry: {
       app: './src/main.js',
     },
@@ -21,8 +41,8 @@ module.exports = (env, argv) => {
       extensions: ['.js', '.vue', '.json', '.css'],
       alias: {
         '@': path.join(__dirname, 'src'),
-        vue: process.env.WEBPACK_SERVE ? 'vue/dist/vue.esm.js' : 'vue/dist/vue.runtime.esm.js',
-        jszip: process.env.WEBPACK_SERVE ? 'jszip/dist/jszip' : 'jszip/dist/jszip.min'
+        vue: argv.mode === 'development' ? 'vue/dist/vue.esm.js' : 'vue/dist/vue.runtime.esm.js',
+        jszip: argv.mode === 'development' ? 'jszip/dist/jszip' : 'jszip/dist/jszip.min'
       }
     },
     module: {
@@ -49,7 +69,7 @@ module.exports = (env, argv) => {
         {
           test: /\.css/,
           loader: [
-            process.env.WEBPACK_SERVE
+            argv.mode === 'development'
               ? 'vue-style-loader'
               : MiniCssExtractPlugin.loader,
               {loader: 'css-loader', options: {importLoaders: 1}},
@@ -99,15 +119,6 @@ module.exports = (env, argv) => {
       })
     ],
     devtool: process.env.WEBPACK_SERVE ? '#source-map' : '',
-    serve: {
-      compress: true,
-      host: '0.0.0.0',
-      port: 4000,
-      hot: {
-        logLevel: 'info',
-        logTime: true
-      }
-    },
     optimization: {
       splitChunks: {
         chunks: 'all'
@@ -120,6 +131,14 @@ module.exports = (env, argv) => {
       net: 'empty',
       tls: 'empty',
       child_process: 'empty'
+    },
+    performance: {
+      hints: false
+    },
+    stats: stats,
+    devServer: {
+      stats: stats,
+      port: 4000
     }
   };
 };

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Minimal starter pack for Vue web applications",
   "scripts": {
-    "start": "webpack-serve",
+    "start": "webpack-dev-server --mode development --progress --hot --inline",
     "build": "npm run clean && npm run build:webpack",
     "build:webpack": "webpack --mode production",
     "clean": "rimraf ./docs",
@@ -37,9 +37,13 @@
     "rimraf": "^2.6.2",
     "style-loader": "^0.22.1",
     "vue-jest": "^2.6.0",
+    "vue-loader": "^15.4.2",
+    "vue-router": "^3.0.2",
     "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.21",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
     "webpack-hot-client": "^4.1.1",
     "webpack-notifier": "^1.6.0",
     "webpack-serve": "^2.0.2"
